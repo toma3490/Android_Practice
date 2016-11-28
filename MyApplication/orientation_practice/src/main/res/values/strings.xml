@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Practice</string>
+    <string name="your_bill">Your bill</string>
+    <string name="sum">Sum</string>
+    <string name="tips_size">Tips size</string>
+    <string name="amount_of_tips">Amount of tips</string>
+    <string name="total_bill">Total bill</string>
+</resources>

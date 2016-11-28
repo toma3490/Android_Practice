@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.android.toma.practice.MainActivity">
+
+    <TextView
+        android:text="@string/your_bill"
+        android:textColor="@color/textColor"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/head1" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:inputType="numberDecimal"
+        android:hint="@string/sum"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:id="@+id/editBill" />
+
+    <TextView
+        android:text="@string/tips_size"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size"
+        android:ems="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tips" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:max="25"
+        android:progress="0"
+        android:id="@+id/seekBar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size"
+        android:id="@+id/percent"/>
+
+    <TextView
+        android:text="@string/amount_of_tips"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/textColor"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/head2" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/text_size"
+        android:textAlignment="center"
+        android:id="@+id/percentValue" />
+
+    <TextView
+        android:text="@string/total_bill"
+        android:textSize="@dimen/text_size"
+        android:textColor="@color/textColor"
+        android:textAlignment="center"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/head3" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalSum"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/text_size"
+        android:textAlignment="center"/>
+</LinearLayout>
