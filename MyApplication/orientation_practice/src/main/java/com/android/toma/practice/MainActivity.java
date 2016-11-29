@@ -37,15 +37,6 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         percentValue = (TextView) findViewById(R.id.percentValue);
         totalSum = (TextView) findViewById(R.id.totalSum);
 
-//        if (seekBar.getProgress() > 0){
-//            if (getBill(editBill) == 0){
-//                Toast.makeText(getApplicationContext(), "Enter bill!", Toast.LENGTH_SHORT).show();
-//            }else{
-//                seekBar.setOnSeekBarChangeListener(this);
-//            }
-//
-//        }
-
         seekBar.setOnSeekBarChangeListener(this);
 
 
@@ -70,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
             @Override
             public void afterTextChanged(Editable s) {
-//                seekBar.setOnSeekBarChangeListener(this);
+                int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
+                countMoney(tipsPercent);
             }
         });
 
@@ -135,11 +127,16 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
+        countMoney(tipsPercent);
+    }
+
+    private void countMoney(int tipsPercent) {
         money = getBill(editBill);
         tips = money * tipsPercent / 100;
         percentValue.setText(String.format("%.2f", tips));
         totalSum.setText(String.format("%.2f", tips + money));
     }
+
 
     private float getBill (EditText editBill){
         float bill;
