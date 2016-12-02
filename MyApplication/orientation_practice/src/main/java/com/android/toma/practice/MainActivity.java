@@ -116,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
 
         percent.setText(String.valueOf(progress) + "%");
-
+        int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
+        countMoney(tipsPercent);
     }
 
     @Override
@@ -126,8 +127,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
-        countMoney(tipsPercent);
+
     }
 
     private void countMoney(int tipsPercent) {
