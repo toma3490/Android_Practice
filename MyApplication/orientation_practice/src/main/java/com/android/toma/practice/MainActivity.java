@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        Log.d(LOG_TAG, "onCreate");
+        Log.d(LOG_TAG, "onCreate" + String.valueOf(savedInstanceState));
 
 
         editBill = (EditText) findViewById(R.id.editBill);
@@ -37,14 +37,11 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         percentValue = (TextView) findViewById(R.id.percentValue);
         totalSum = (TextView) findViewById(R.id.totalSum);
 
-//        if (seekBar.getProgress() > 0){
-//            if (getBill(editBill) == 0){
-//                Toast.makeText(getApplicationContext(), "Enter bill!", Toast.LENGTH_SHORT).show();
-//            }else{
-//                seekBar.setOnSeekBarChangeListener(this);
-//            }
-//
-//        }
+        if(savedInstanceState != null){
+            percentValue.setText(savedInstanceState.getString(KEY_TIPS));
+            totalSum.setText(savedInstanceState.getString(KEY_MONEY));
+            tips = Float.valueOf(savedInstanceState.getString(KEY_TIPS));
+        }
 
         seekBar.setOnSeekBarChangeListener(this);
 
@@ -70,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
             @Override
             public void afterTextChanged(Editable s) {
-//                seekBar.setOnSeekBarChangeListener(this);
+                int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
+                countMoney(tipsPercent);
             }
         });
 
@@ -91,12 +89,6 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         Log.d(LOG_TAG, "onRestart");
     }
 
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        percentValue.setText(savedInstanceState.get(KEY_TIPS).toString());
-        totalSum.setText(savedInstanceState.get(KEY_MONEY).toString());
-        Log.d(LOG_TAG, "onRestoreInstanceState");
-    }
 
     protected void onResume() {
         super.onResume();
@@ -107,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         super.onSaveInstanceState(outState);
         outState.putString(KEY_TIPS, percentValue.getText().toString());
         outState.putString(KEY_MONEY, totalSum.getText().toString());
+
         Log.d(LOG_TAG, "onSaveInstanceState");
     }
 
@@ -132,9 +125,12 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
 
     }
 
-    @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
         int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
+        countMoney(tipsPercent);
+    }
+
+    private void countMoney(int tipsPercent) {
         money = getBill(editBill);
         tips = money * tipsPercent / 100;
         percentValue.setText(String.format("%.2f", tips));
