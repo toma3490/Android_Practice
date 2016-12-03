@@ -30,22 +30,13 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         setContentView(R.layout.main);
         Log.d(LOG_TAG, "onCreate" + String.valueOf(savedInstanceState));
 
-
         editBill = (EditText) findViewById(R.id.editBill);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         percent = (TextView) findViewById(R.id.percent);
         percentValue = (TextView) findViewById(R.id.percentValue);
         totalSum = (TextView) findViewById(R.id.totalSum);
 
-        if(savedInstanceState != null){
-            percentValue.setText(savedInstanceState.getString(KEY_TIPS));
-            totalSum.setText(savedInstanceState.getString(KEY_MONEY));
-            tips = Float.valueOf(savedInstanceState.getString(KEY_TIPS));
-        }
-
         seekBar.setOnSeekBarChangeListener(this);
-
-
 
         editBill.addTextChangedListener(new TextWatcher() {
             @Override
@@ -89,6 +80,13 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         Log.d(LOG_TAG, "onRestart");
     }
 
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        percentValue.setText(savedInstanceState.get(KEY_TIPS).toString());
+        totalSum.setText(savedInstanceState.get(KEY_MONEY).toString());
+        Log.d(LOG_TAG, "onRestoreInstanceState");
+    }
+
 
     protected void onResume() {
         super.onResume();
@@ -117,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
 
         percent.setText(String.valueOf(progress) + "%");
-
+        int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
+        countMoney(tipsPercent);
     }
 
     @Override
@@ -126,8 +125,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     }
 
     public void onStopTrackingTouch(SeekBar seekBar) {
-        int tipsPercent = Integer.parseInt(String.valueOf(seekBar.getProgress()));
-        countMoney(tipsPercent);
+
     }
 
     private void countMoney(int tipsPercent) {
